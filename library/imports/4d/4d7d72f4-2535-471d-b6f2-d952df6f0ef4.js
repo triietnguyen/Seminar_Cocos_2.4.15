@@ -30,52 +30,37 @@ cc.Class({
     });
   },
   fetchDataWithTimeout: function fetchDataWithTimeout(url, timeout) {
-    return new Promise(function (resolve, resject) {
+    return new Promise(function (resolve, reject) {
       var controller = new AbortController();
       var signal = controller.signal;
       var timer = setTimeout(function () {
         controller.abort();
-        resject('Request timeout');
+        reject('Request timed out');
       }, timeout);
       fetch(url, {
         signal: signal
       }).then(function (response) {
-        console.log("Request is complete \uD83C\uDF89");
-      })["catch"](function (e) {
-        console.log("Fetch error: " + e.message + " \uD83D\uDE2F");
+        clearTimeout(timer);
+
+        if (!response.ok) {
+          reject('Not Ok');
+          return;
+        }
+
+        return response.json();
+      }).then(function (data) {
+        resolve(data);
+      })["catch"](function (err) {
+        if (err.name === 'AbortError') {
+          reject(er);
+        } else {
+          reject(err);
+        }
       });
     });
   },
   start: function start() {} // update (dt) {},
 
-}); // fetchDataWithTimeout(url, timeout) {
-//     return new Promise((resolve, reject) => {
-//         const controller = new AbortController(); 
-//         const signal = controller.signal;
-//         const timer = setTimeout(() => {
-//             controller.abort(); 
-//             reject('Request timed out'); 
-//         }, timeout);
-//         fetch(url, { signal })
-//             .then(response => {
-//                 clearTimeout(timer); 
-//                 if (!response.ok) {
-//                     reject('Network response was not ok');
-//                     return;
-//                 }
-//                 return response.json();
-//             })
-//             .then(data => {
-//                 resolve(data); 
-//             })
-//             .catch(err => {
-//                 if (err.name === 'AbortError') {
-//                     reject('Fetch aborted due to timeout');
-//                 } else {
-//                     reject(err); 
-//                 }
-//             });
-//     });
-// },
+});
 
 cc._RF.pop();

@@ -16,13 +16,6 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-// Learn cc.Class:
-//  - https://docs.cocos.com/creator/2.4/manual/en/scripting/class.html
-// Learn Attribute:
-//  - https://docs.cocos.com/creator/2.4/manual/en/scripting/reference/attributes.html
-// Learn life-cycle callbacks:
-//  - https://docs.cocos.com/creator/2.4/manual/en/scripting/life-cycle-callbacks.html
-// item.js
 cc.Class({
   "extends": cc.Component,
   properties: {
@@ -38,20 +31,25 @@ cc.Class({
     this.executed = false;
     this.dependencies = [];
     this.timeExcute = timeExcute;
-    console.log(this.timeExcute);
   },
-  wait: function wait(store) {
-    this.dependencies.push(store);
+  wait: function wait(stores) {
+    if (Array.isArray(stores)) {
+      var _this$dependencies;
+
+      (_this$dependencies = this.dependencies).push.apply(_this$dependencies, stores);
+    } else {
+      this.dependencies.push(stores);
+    }
   },
   run: function () {
     var _run = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(stepTime) {
-      var _iterator, _step, dep;
+      var _iterator, _step, dep, depResult;
 
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              if (!(this.timeExcute > stepTime)) {
+              if (!this.executed) {
                 _context.next = 2;
                 break;
               }
@@ -59,48 +57,59 @@ cc.Class({
               return _context.abrupt("return");
 
             case 2:
+              if (!(this.timeExcute > stepTime)) {
+                _context.next = 4;
+                break;
+              }
+
+              return _context.abrupt("return");
+
+            case 4:
               _iterator = _createForOfIteratorHelperLoose(this.dependencies);
 
-            case 3:
+            case 5:
               if ((_step = _iterator()).done) {
-                _context.next = 11;
+                _context.next = 16;
                 break;
               }
 
               dep = _step.value;
 
               if (!(dep.timeExcute > stepTime)) {
-                _context.next = 7;
+                _context.next = 9;
                 break;
               }
 
-              return _context.abrupt("return");
-
-            case 7:
-              _context.next = 9;
-              return dep.run(stepTime);
+              return _context.abrupt("return", false);
 
             case 9:
-              _context.next = 3;
-              break;
+              _context.next = 11;
+              return dep.run(stepTime);
 
             case 11:
-              if (!this.executed) {
-                _context.next = 13;
+              depResult = _context.sent;
+
+              if (depResult) {
+                _context.next = 14;
                 break;
               }
 
-              return _context.abrupt("return");
+              return _context.abrupt("return", false);
 
-            case 13:
-              console.log(this.timeExcute);
+            case 14:
+              _context.next = 5;
+              break;
+
+            case 16:
               this.executed = true;
-              console.log(this.title);
-              this.node.active = false;
               _context.next = 19;
-              return this.sleep(stepTime * 1000);
+              return this.execute(stepTime * 1000);
 
             case 19:
+              this.node.active = false;
+              return _context.abrupt("return", true);
+
+            case 21:
             case "end":
               return _context.stop();
           }
@@ -114,10 +123,30 @@ cc.Class({
 
     return run;
   }(),
-  sleep: function sleep(ms) {
-    return new Promise(function (resolve) {
-      return setTimeout(resolve, ms);
-    });
+  execute: function execute(ms) {
+    var _this = this;
+
+    return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+      return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              console.log("\uD83D\uDD04 \u0110ang ch\u1EA1y " + _this.title);
+              _context2.next = 3;
+              return new Promise(function (resolve) {
+                return setTimeout(resolve, ms);
+              });
+
+            case 3:
+              console.log("\u2705 Ho\xE0n th\xE0nh " + _this.title);
+
+            case 4:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }))();
   }
 });
 

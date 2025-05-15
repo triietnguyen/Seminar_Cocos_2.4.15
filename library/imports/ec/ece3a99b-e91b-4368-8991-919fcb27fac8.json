@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "FaildForm",
+    "texture": "4b9384f7-df3a-4349-baef-41cd26cfe94a",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      1180,
+      1124
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      1180,
+      1124
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

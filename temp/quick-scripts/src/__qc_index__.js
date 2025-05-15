@@ -8,3 +8,4 @@ require('./assets/Bai_5/Scripts/Bai_5');
 require('./assets/Bai_6/Scripts/Bai_6');
 require('./assets/Bai_7/Scripts/Bai_7');
 require('./assets/Bai_8/Scripts/Bai_8');
+require('./assets/Bai_9/Scripts/Bai_9');

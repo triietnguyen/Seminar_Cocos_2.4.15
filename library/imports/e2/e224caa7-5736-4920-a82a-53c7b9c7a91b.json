@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "ModalDone",
+    "texture": "49002af0-f47c-4131-b5da-0a7f83c99ab1",
+    "atlas": "",
+    "rect": [
+      104,
+      6,
+      917,
+      960
+    ],
+    "offset": [
+      50.5,
+      26
+    ],
+    "originalSize": [
+      1024,
+      1024
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

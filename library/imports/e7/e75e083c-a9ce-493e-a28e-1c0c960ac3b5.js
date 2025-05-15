@@ -10,19 +10,15 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-// Learn cc.Class:
-//  - https://docs.cocos.com/creator/2.4/manual/en/scripting/class.html
-// Learn Attribute:
-//  - https://docs.cocos.com/creator/2.4/manual/en/scripting/reference/attributes.html
-// Learn life-cycle callbacks:
-//  - https://docs.cocos.com/creator/2.4/manual/en/scripting/life-cycle-callbacks.html
 cc.Class({
   "extends": cc.Component,
   properties: {
     content: cc.Node,
     itemPrefab: cc.Prefab,
     autoBtn: cc.Button,
-    popUp: cc.Node
+    popUpFailed: cc.Node,
+    popUpSuccess: cc.Node,
+    fadeOverlay: cc.Node
   },
   init: function init(i, time) {
     var item = cc.instantiate(this.itemPrefab);
@@ -33,74 +29,159 @@ cc.Class({
     this.content.addChild(item);
   },
   onLoad: function onLoad() {
-    this.popUp.active = false;
-    this.init(4, 2);
-    this.init(5, 2);
-    this.init(2, 2);
-    this.init(3, 4);
-    this.init(1, 2);
+    this.popUpFailed.active = false;
+    this.popUpSuccess.active = false;
+    this.init(1, 3);
+    this.init(2, 3);
+    this.init(3, 3);
+    this.init(4, 3);
+    this.init(5, 3);
+    this.init(6, 3);
+    this.init(7, 3);
+    this.init(8, 3);
+    this.init(9, 3);
+    this.init(10, 3);
+    this.button = this.popUpSuccess.getChildByName("CloseButton").getComponent(cc.Button);
+    this.button.node.on('click', this.closePopUpSuccess, this);
   },
   start: function start() {},
-  autoClick: function autoClick() {
-    this.content.children[4].getComponent("item").wait(this.content.children[3].getComponent("item"));
-    this.content.children[3].getComponent("item").wait(this.content.children[2].getComponent("item"));
-    this.content.children[2].getComponent("item").wait(this.content.children[1].getComponent("item"));
-    this.content.children[1].getComponent("item").wait(this.content.children[0].getComponent("item"));
-    var store1 = this.content.children[4].getComponent("item");
-    var store2 = this.content.children[2].getComponent("item");
-    var store3 = this.content.children[3].getComponent("item");
-    var store4 = this.content.children[0].getComponent("item");
-    var store5 = this.content.children[1].getComponent("item");
-    this.contribute(3, store1, store2, store3, store4, store5);
+  showPopUpFailed: function showPopUpFailed() {
+    this.popUpFailed.opacity = 0;
+    this.popUpFailed.active = true;
+    cc.tween(this.popUpFailed).to(0.4, {
+      opacity: 255
+    }).start();
   },
+  closePopUpFailed: function closePopUpFailed() {
+    var _this = this;
+
+    cc.tween(this.popUpFailed).to(0.4, {
+      opacity: 0
+    }).call(function () {
+      _this.popUpFailed.active = false;
+      _this.fadeOverlay.active = true;
+      _this.fadeOverlay.opacity = 0;
+      cc.tween(_this.fadeOverlay).to(0.5, {
+        opacity: 255
+      }).call(function () {
+        cc.director.loadScene(cc.director.getScene().name);
+      }).start();
+    }).start();
+  },
+  showPopUpSucces: function showPopUpSucces() {
+    this.popUpSuccess.opacity = 0;
+    this.popUpSuccess.active = true;
+    cc.tween(this.popUpSuccess).to(0.4, {
+      opacity: 255
+    }).start();
+  },
+  closePopUpSuccess: function closePopUpSuccess() {
+    var _this2 = this;
+
+    cc.tween(this.popUpSuccess).to(0.4, {
+      opacity: 0
+    }).call(function () {
+      _this2.popUpSuccess.active = false;
+      _this2.fadeOverlay.active = true;
+      _this2.fadeOverlay.opacity = 0;
+      cc.tween(_this2.fadeOverlay).to(0.5, {
+        opacity: 255
+      }).call(function () {
+        cc.director.loadScene(cc.director.getScene().name);
+      }).start();
+    }).start();
+  },
+  autoClick: function autoClick() {
+    this.autoBtn.node.active = false;
+    var mision1 = this.content.children[0].getComponent("item");
+    var mision2 = this.content.children[1].getComponent("item");
+    var mision3 = this.content.children[2].getComponent("item");
+    var mision4 = this.content.children[3].getComponent("item");
+    var mision5 = this.content.children[4].getComponent("item");
+    var mision6 = this.content.children[5].getComponent("item");
+    var mision7 = this.content.children[6].getComponent("item");
+    var mision8 = this.content.children[7].getComponent("item");
+    var mision9 = this.content.children[8].getComponent("item");
+    var mision10 = this.content.children[9].getComponent("item");
+    mision10.wait([mision9, mision6, mision2]);
+    mision9.wait([mision8, mision7]);
+    mision6.wait([mision4, mision5]);
+    mision4.wait(mision3);
+    mision2.wait(mision1);
+    this.contribute(3, mision10);
+  },
+  // contribute: async function (stepTime, ...stores) {
+  //     for (const store of stores) {
+  //         await store.run(stepTime);
+  //     }
+  //     complete = true;
+  //     for (const store of stores) {
+  //         if (store.executed == false) {
+  //             complete = false;
+  //             this.showPopUpFailed();
+  //             return
+  //         }
+  //     }
+  //     if (complete == true) {
+  //         this.showPopUpSucces();
+  //     } else {
+  //         this.showPopUpFailed();
+  //     }
+  // },
   contribute: function () {
     var _contribute = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(stepTime) {
-      var _len,
+      var complete,
+          _len,
           stores,
           _key,
           _i,
           _stores,
           store,
-          _i2,
-          _stores2,
-          _store,
+          result,
           _args = arguments;
 
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
+              complete = true;
+
               for (_len = _args.length, stores = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
                 stores[_key - 1] = _args[_key];
               }
 
               _i = 0, _stores = stores;
 
-            case 2:
+            case 3:
               if (!(_i < _stores.length)) {
-                _context.next = 9;
+                _context.next = 12;
                 break;
               }
 
               store = _stores[_i];
-              _context.next = 6;
+              _context.next = 7;
               return store.run(stepTime);
 
-            case 6:
-              _i++;
-              _context.next = 2;
-              break;
+            case 7:
+              result = _context.sent;
 
-            case 9:
-              for (_i2 = 0, _stores2 = stores; _i2 < _stores2.length; _i2++) {
-                _store = _stores2[_i2];
-
-                if (_store.executed == false) {
-                  this.popUp.active = true;
-                }
+              if (!result) {
+                complete = false;
               }
 
-            case 10:
+            case 9:
+              _i++;
+              _context.next = 3;
+              break;
+
+            case 12:
+              if (complete) {
+                this.showPopUpSucces();
+              } else {
+                this.showPopUpFailed();
+              }
+
+            case 13:
             case "end":
               return _context.stop();
           }

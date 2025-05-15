@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "BackgroundList",
+    "texture": "b485c8c4-e67d-4bc5-b4b0-4374e14bb07a",
+    "atlas": "",
+    "rect": [
+      0,
+      3,
+      1024,
+      1533
+    ],
+    "offset": [
+      0,
+      -1.5
+    ],
+    "originalSize": [
+      1024,
+      1536
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

@@ -45,22 +45,37 @@ cc.Class({
 
 
     fetchDataWithTimeout(url, timeout) {
-        return new Promise((resolve, resject) => {
+        return new Promise((resolve, reject) => {
             const controller = new AbortController();
-            const { signal } = controller;
+            const signal = controller.signal;
+
             const timer = setTimeout(() => {
                 controller.abort();
-                resject('Request timeout')
-            }, timeout)
-            fetch(url, { signal }).then(response => {
+                reject('Request timed out');
+            }, timeout);
 
-                console.log(`Request is complete 🎉`);
-            }).catch(e => {
-                console.log(`Fetch error: ${e.message} 😯`);
-            });
-
-        })
+            fetch(url, { signal })
+                .then(response => {
+                    clearTimeout(timer);
+                    if (!response.ok) {
+                        reject('Not Ok');
+                        return;
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    resolve(data);
+                })
+                .catch(err => {
+                    if (err.name === 'AbortError') {
+                        reject(er);
+                    } else {
+                        reject(err);
+                    }
+                });
+        });
     },
+
 
 
     start() {
@@ -72,34 +87,3 @@ cc.Class({
 
 
 
-// fetchDataWithTimeout(url, timeout) {
-//     return new Promise((resolve, reject) => {
-//         const controller = new AbortController(); 
-//         const signal = controller.signal;
-
-//         const timer = setTimeout(() => {
-//             controller.abort(); 
-//             reject('Request timed out'); 
-//         }, timeout);
-
-//         fetch(url, { signal })
-//             .then(response => {
-//                 clearTimeout(timer); 
-//                 if (!response.ok) {
-//                     reject('Network response was not ok');
-//                     return;
-//                 }
-//                 return response.json();
-//             })
-//             .then(data => {
-//                 resolve(data); 
-//             })
-//             .catch(err => {
-//                 if (err.name === 'AbortError') {
-//                     reject('Fetch aborted due to timeout');
-//                 } else {
-//                     reject(err); 
-//                 }
-//             });
-//     });
-// },

@@ -1,17 +1,9 @@
-// Learn cc.Class:
-//  - https://docs.cocos.com/creator/2.4/manual/en/scripting/class.html
-// Learn Attribute:
-//  - https://docs.cocos.com/creator/2.4/manual/en/scripting/reference/attributes.html
-// Learn life-cycle callbacks:
-//  - https://docs.cocos.com/creator/2.4/manual/en/scripting/life-cycle-callbacks.html
-
-// item.js
 cc.Class({
     extends: cc.Component,
 
     properties: {
         title: "",
-        timeExcute:0,
+        timeExcute: 0,
     },
 
     onLoad: function () {
@@ -24,36 +16,37 @@ cc.Class({
         this.executed = false;
         this.dependencies = [];
         this.timeExcute = timeExcute;
-        console.log(this.timeExcute)
     },
 
-    wait: function (store) {
-        this.dependencies.push(store);
+    wait: function (stores) {
+        if (Array.isArray(stores)) {
+            this.dependencies.push(...stores);
+        } else {
+            this.dependencies.push(stores);
+        }
     },
 
     run: async function (stepTime) {
-         if(this.timeExcute > stepTime){
-            
-            return
-        }
+        if (this.executed) return;
+        if (this.timeExcute > stepTime) return;
+
         for (const dep of this.dependencies) {
-            if(dep.timeExcute > stepTime){
-                return
+            if (dep.timeExcute > stepTime) {
+                return false;
             }
-            await dep.run(stepTime);
+            const depResult = await dep.run(stepTime);
+            if (!depResult) return false;
         }
 
-        if (this.executed) return;
-        console.log(this.timeExcute)
         this.executed = true;
-        
-   
-        console.log(this.title);
+        await this.execute(stepTime * 1000);
         this.node.active = false;
-        await this.sleep(stepTime * 1000);
+        return true;
     },
 
-    sleep: function (ms) {
-        return new Promise((resolve) => setTimeout(resolve, ms));
+    async execute(ms) {
+        console.log(`🔄 Đang chạy ${this.title}`);
+        await new Promise((resolve) => setTimeout(resolve, ms));
+        console.log(`✅ Hoàn thành ${this.title}`);
     },
 });

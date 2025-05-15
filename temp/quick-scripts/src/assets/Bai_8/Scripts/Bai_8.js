@@ -56,12 +56,12 @@ cc.Class({
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return promisify(_this.getLocalTime)();
+              return _this.promisify(_this.getLocalTime)();
 
             case 2:
               localTime = _context.sent;
               _context.next = 5;
-              return promisify(_this.getServerTime)();
+              return _this.promisify(_this.getServerTime)();
 
             case 5:
               serverTime = _context.sent;
@@ -76,13 +76,21 @@ cc.Class({
       }, _callee);
     }))();
   },
-  // promisify(fn) {
-  //     return (...args)=>{
-  //         try{
-  //             let checkFunc = fn(...args);
-  //         }catch
-  //     }
-  // },
+  promisify: function promisify(fn) {
+    return function () {
+      try {
+        var checkFunc = fn.apply(void 0, arguments);
+
+        if (checkFunc instanceof Promise) {
+          return checkFunc;
+        } else {
+          return Promise.resolve(checkFunc);
+        }
+      } catch (error) {
+        return Promise.reject(errorr);
+      }
+    };
+  },
   start: function start() {} // update (dt) {},
 
 });

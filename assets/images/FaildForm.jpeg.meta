@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "4b9384f7-df3a-4349-baef-41cd26cfe94a",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 1180,
+  "height": 1124,
+  "platformSettings": {},
+  "subMetas": {
+    "FaildForm": {
+      "ver": "1.0.6",
+      "uuid": "ece3a99b-e91b-4368-8991-919fcb27fac8",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "4b9384f7-df3a-4349-baef-41cd26cfe94a",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 1180,
+      "height": 1124,
+      "rawWidth": 1180,
+      "rawHeight": 1124,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

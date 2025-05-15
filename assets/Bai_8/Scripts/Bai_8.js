@@ -41,19 +41,26 @@ cc.Class({
     },
 
     async onLoad() {
-        const localTime = await promisify(this.getLocalTime)();
-        const serverTime = await promisify(this.getServerTime)();
+        const localTime = await this.promisify(this.getLocalTime)();
+        const serverTime = await this.promisify(this.getServerTime)();
         const latancy = serverTime - localTime;
         console.log("Độ trễ : " + latancy)
     },
 
-    // promisify(fn) {
-    //     return (...args)=>{
-    //         try{
-    //             let checkFunc = fn(...args);
-    //         }catch
-    //     }
-    // },
+    promisify(fn) {
+        return (...args) => {
+            try {
+                let checkFunc = fn(...args);
+                if (checkFunc instanceof Promise) {
+                    return checkFunc;
+                } else {
+                    return Promise.resolve(checkFunc)
+                }
+            } catch (error) {
+                return Promise.reject(errorr)
+            }
+        }
+    },
 
     start() {
 
