@@ -614,9 +614,119 @@
     "meta": 1747289495537,
     "relativePath": "Bai_4/Scripts/item.js"
   },
+  "7000ac35-8da7-49fe-950d-9f6d3a2b19c6": {
+    "asset": 1747292535894,
+    "meta": 1747292535897,
+    "relativePath": "Bai_2/Sence/Bai_2.fire"
+  },
   "f480ae23-a39d-45f8-be5d-913998e78e8c": {
-    "asset": 1747289772888,
-    "meta": 1747289786732,
+    "asset": 1747292357192,
+    "meta": 1747292415336,
     "relativePath": "Bai_2/Scripts/Bai_2.js"
+  },
+  "a43cb22f-10f9-42de-bfec-b632fea429f4": {
+    "asset": 1747292475317,
+    "meta": 1747292475321,
+    "relativePath": "Bai_5"
+  },
+  "0ca903c3-1e0e-4666-8193-802aae80136e": {
+    "asset": 1747292492363,
+    "meta": 1747292492367,
+    "relativePath": "Bai_5/Scripts"
+  },
+  "c1f3f5a2-a2b2-4e6d-ba21-115c305f8b3f": {
+    "asset": 1747292513976,
+    "meta": 1747292513977,
+    "relativePath": "Bai_5/Sence"
+  },
+  "aae662bf-b6f3-43b3-81b1-15eb31396076": {
+    "asset": 1747293525705,
+    "meta": 1747293525707,
+    "relativePath": "Bai_5/Sence/Bai_5.fire"
+  },
+  "a3850f94-4d4c-4499-a989-f870ffb020a8": {
+    "asset": 1747293151962,
+    "meta": 1747293154338,
+    "relativePath": "Bai_5/Scripts/Bai_5.js"
+  },
+  "cc30da2a-3943-439f-812d-69ae180bc9da": {
+    "asset": 1747293327759,
+    "meta": 1747293327761,
+    "relativePath": "Bai_7"
+  },
+  "1c2fa404-a51c-4e47-8a94-b1aef0f2276e": {
+    "asset": 1747293359043,
+    "meta": 1747293359044,
+    "relativePath": "Bai_7/Scripts"
+  },
+  "378b8e4b-27a5-4b43-bc32-1d1501c724b1": {
+    "asset": 1747293367530,
+    "meta": 1747293367530,
+    "relativePath": "Bai_7/Sence"
+  },
+  "1fa2ed3c-7076-4eea-bc5d-8ec7e44f9655": {
+    "asset": 1747295007649,
+    "meta": 1747295007652,
+    "relativePath": "Bai_7/Sence/Bai_7.fire"
+  },
+  "a31801e9-36a3-4e6c-ac64-c77f48cf6352": {
+    "asset": 1747293550594,
+    "meta": 1747293550595,
+    "relativePath": "Bai_6"
+  },
+  "6d307d78-2cae-46bd-8a9f-b2aac7a62ac1": {
+    "asset": 1747293573864,
+    "meta": 1747293573865,
+    "relativePath": "Bai_6/Scripts"
+  },
+  "b58a6f50-81ef-4a0b-a8e6-e36774d5f108": {
+    "asset": 1747293579913,
+    "meta": 1747293579914,
+    "relativePath": "Bai_6/Sence"
+  },
+  "dce50673-9156-4452-9937-704db2e3a009": {
+    "asset": 1747300091033,
+    "meta": 1747300091037,
+    "relativePath": "Bai_6/Sence/Bai_6.fire"
+  },
+  "4d7d72f4-2535-471d-b6f2-d952df6f0ef4": {
+    "asset": 1747300479887,
+    "meta": 1747302105522,
+    "relativePath": "Bai_6/Scripts/Bai_6.js"
+  },
+  "1969091c-40c6-4fb3-851b-7635b400e096": {
+    "asset": 1747305046604,
+    "meta": 1747305047776,
+    "relativePath": "Bai_7/Scripts/Bai_7.js"
+  },
+  "1374f03d-85b1-4387-8f33-56621b90c9e1": {
+    "asset": 1747305181241,
+    "meta": 1747305181242,
+    "relativePath": "Bai_8"
+  },
+  "206b9d98-8db3-4dcd-aef0-5c2aac8f1561": {
+    "asset": 1747305195597,
+    "meta": 1747305195598,
+    "relativePath": "Bai_8/Scripts"
+  },
+  "ac5afe57-a2b4-4833-a04e-9ca4a3b7d9e5": {
+    "asset": 1747305203167,
+    "meta": 1747305203168,
+    "relativePath": "Bai_8/Sence"
+  },
+  "df32bd2b-5a75-4ebd-b39e-45a8f3219ec1": {
+    "asset": 1747306734810,
+    "meta": 1747306734813,
+    "relativePath": "Bai_8/Sence/Bai_8.fire"
+  },
+  "4730e0b6-4d10-48aa-bd09-a2887af776e5": {
+    "asset": 1747306726839,
+    "meta": 1747306728391,
+    "relativePath": "Bai_8/Scripts/Bai_8.js"
+  },
+  "74b98a0e-ceff-4d43-b7e1-a7775f938c81": {
+    "asset": 1747305988830,
+    "meta": 1747306728392,
+    "relativePath": "Bai_4.zip"
   }
 }
