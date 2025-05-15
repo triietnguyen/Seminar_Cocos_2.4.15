@@ -1,6 +1,6 @@
 "use strict";
 cc._RF.push(module, '092c36NADVGj4BWiVG1zAUo', 'item');
-// Scripts/item.js
+// Bai_4/Scripts/item.js
 
 "use strict";
 
@@ -26,16 +26,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 cc.Class({
   "extends": cc.Component,
   properties: {
-    title: ""
+    title: "",
+    timeExcute: 0
   },
   onLoad: function onLoad() {
     this.dependencies = [];
     this.executed = false;
   },
-  init: function init(title) {
+  init: function init(title, timeExcute) {
     this.title = title;
     this.executed = false;
     this.dependencies = [];
+    this.timeExcute = timeExcute;
+    console.log(this.timeExcute);
   },
   wait: function wait(store) {
     this.dependencies.push(store);
@@ -48,38 +51,56 @@ cc.Class({
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _iterator = _createForOfIteratorHelperLoose(this.dependencies);
-
-            case 1:
-              if ((_step = _iterator()).done) {
-                _context.next = 7;
-                break;
-              }
-
-              dep = _step.value;
-              _context.next = 5;
-              return dep.run(stepTime);
-
-            case 5:
-              _context.next = 1;
-              break;
-
-            case 7:
-              if (!this.executed) {
-                _context.next = 9;
+              if (!(this.timeExcute > stepTime)) {
+                _context.next = 2;
                 break;
               }
 
               return _context.abrupt("return");
 
+            case 2:
+              _iterator = _createForOfIteratorHelperLoose(this.dependencies);
+
+            case 3:
+              if ((_step = _iterator()).done) {
+                _context.next = 11;
+                break;
+              }
+
+              dep = _step.value;
+
+              if (!(dep.timeExcute > stepTime)) {
+                _context.next = 7;
+                break;
+              }
+
+              return _context.abrupt("return");
+
+            case 7:
+              _context.next = 9;
+              return dep.run(stepTime);
+
             case 9:
+              _context.next = 3;
+              break;
+
+            case 11:
+              if (!this.executed) {
+                _context.next = 13;
+                break;
+              }
+
+              return _context.abrupt("return");
+
+            case 13:
+              console.log(this.timeExcute);
               this.executed = true;
               console.log(this.title);
               this.node.active = false;
-              _context.next = 14;
+              _context.next = 19;
               return this.sleep(stepTime * 1000);
 
-            case 14:
+            case 19:
             case "end":
               return _context.stop();
           }

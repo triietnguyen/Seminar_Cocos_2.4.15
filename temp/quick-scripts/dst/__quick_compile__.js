@@ -1,6 +1,6 @@
 
 (function () {
-var scripts = [{"deps":{"./assets/Scripts/item":1,"./assets/Scripts/bai4":2},"path":"preview-scripts/__qc_index__.js"},{"deps":{},"path":"preview-scripts/assets/Scripts/item.js"},{"deps":{},"path":"preview-scripts/assets/Scripts/bai4.js"}];
+var scripts = [{"deps":{"./assets/Bai_2/Scripts/Bai_2":5,"./assets/Bai_3/Scripts/Bai_3":4,"./assets/Bai_4/Scripts/bai4":1,"./assets/Bai_4/Scripts/item":2,"./assets/Bai_1/Scripts/Bai_1":3},"path":"preview-scripts/__qc_index__.js"},{"deps":{},"path":"preview-scripts/assets/Bai_4/Scripts/bai4.js"},{"deps":{},"path":"preview-scripts/assets/Bai_4/Scripts/item.js"},{"deps":{},"path":"preview-scripts/assets/Bai_1/Scripts/Bai_1.js"},{"deps":{},"path":"preview-scripts/assets/Bai_3/Scripts/Bai_3.js"},{"deps":{},"path":"preview-scripts/assets/Bai_2/Scripts/Bai_2.js"}];
 var entries = ["preview-scripts/__qc_index__.js"];
 var bundleScript = 'preview-scripts/__qc_bundle__.js';
 

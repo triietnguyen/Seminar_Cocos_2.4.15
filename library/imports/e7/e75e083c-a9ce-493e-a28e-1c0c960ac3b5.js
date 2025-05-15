@@ -1,6 +1,6 @@
 "use strict";
 cc._RF.push(module, 'e75e0g8qc5JPqKOHAyWCsO1', 'bai4');
-// Scripts/bai4.js
+// Bai_4/Scripts/bai4.js
 
 "use strict";
 
@@ -16,40 +16,41 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //  - https://docs.cocos.com/creator/2.4/manual/en/scripting/reference/attributes.html
 // Learn life-cycle callbacks:
 //  - https://docs.cocos.com/creator/2.4/manual/en/scripting/life-cycle-callbacks.html
-// bai4.js
 cc.Class({
   "extends": cc.Component,
   properties: {
-    scrollView: cc.ScrollView,
+    content: cc.Node,
     itemPrefab: cc.Prefab,
-    autoBtn: cc.Button
+    autoBtn: cc.Button,
+    popUp: cc.Node
   },
-  init: function init(i) {
+  init: function init(i, time) {
     var item = cc.instantiate(this.itemPrefab);
     var title = item.getChildByName("title").getComponent(cc.Label);
     title.string = "Nhiệm vụ " + i;
     var compItem = item.getComponent("item");
-    compItem.init("Nhiệm vụ " + i);
-    this.scrollView.content.addChild(item);
+    compItem.init("Nhiệm vụ " + i, time);
+    this.content.addChild(item);
   },
   onLoad: function onLoad() {
-    this.init(4);
-    this.init(5);
-    this.init(2);
-    this.init(3);
-    this.init(1);
+    this.popUp.active = false;
+    this.init(4, 2);
+    this.init(5, 2);
+    this.init(2, 2);
+    this.init(3, 4);
+    this.init(1, 2);
   },
   start: function start() {},
   autoClick: function autoClick() {
-    this.scrollView.content.children[4].getComponent("item").wait(this.scrollView.content.children[3].getComponent("item"));
-    this.scrollView.content.children[3].getComponent("item").wait(this.scrollView.content.children[2].getComponent("item"));
-    this.scrollView.content.children[2].getComponent("item").wait(this.scrollView.content.children[1].getComponent("item"));
-    this.scrollView.content.children[1].getComponent("item").wait(this.scrollView.content.children[0].getComponent("item"));
-    var store1 = this.scrollView.content.children[4].getComponent("item");
-    var store2 = this.scrollView.content.children[2].getComponent("item");
-    var store3 = this.scrollView.content.children[3].getComponent("item");
-    var store4 = this.scrollView.content.children[0].getComponent("item");
-    var store5 = this.scrollView.content.children[1].getComponent("item");
+    this.content.children[4].getComponent("item").wait(this.content.children[3].getComponent("item"));
+    this.content.children[3].getComponent("item").wait(this.content.children[2].getComponent("item"));
+    this.content.children[2].getComponent("item").wait(this.content.children[1].getComponent("item"));
+    this.content.children[1].getComponent("item").wait(this.content.children[0].getComponent("item"));
+    var store1 = this.content.children[4].getComponent("item");
+    var store2 = this.content.children[2].getComponent("item");
+    var store3 = this.content.children[3].getComponent("item");
+    var store4 = this.content.children[0].getComponent("item");
+    var store5 = this.content.children[1].getComponent("item");
     this.contribute(3, store1, store2, store3, store4, store5);
   },
   contribute: function () {
@@ -69,42 +70,42 @@ cc.Class({
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              console.log(stepTime);
-
               for (_len = _args.length, stores = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
                 stores[_key - 1] = _args[_key];
               }
 
-              console.log(stores);
+              _i = 0, _stores = stores;
 
-              for (_i = 0, _stores = stores; _i < _stores.length; _i++) {
-                store = _stores[_i];
-                store.executed = false;
-              }
-
-              _i2 = 0, _stores2 = stores;
-
-            case 5:
-              if (!(_i2 < _stores2.length)) {
-                _context.next = 12;
+            case 2:
+              if (!(_i < _stores.length)) {
+                _context.next = 9;
                 break;
               }
 
-              _store = _stores2[_i2];
-              _context.next = 9;
-              return _store.run(stepTime);
+              store = _stores[_i];
+              _context.next = 6;
+              return store.run(stepTime);
 
-            case 9:
-              _i2++;
-              _context.next = 5;
+            case 6:
+              _i++;
+              _context.next = 2;
               break;
 
-            case 12:
+            case 9:
+              for (_i2 = 0, _stores2 = stores; _i2 < _stores2.length; _i2++) {
+                _store = _stores2[_i2];
+
+                if (_store.executed == false) {
+                  this.popUp.active = true;
+                }
+              }
+
+            case 10:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee);
+      }, _callee, this);
     }));
 
     function contribute(_x) {

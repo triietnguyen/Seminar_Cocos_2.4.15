@@ -12,28 +12,31 @@ cc.Class({
         content: cc.Node,
         itemPrefab: cc.Prefab,
         autoBtn: cc.Button,
+        popUp: cc.Node
     },
 
-    init: function (i) {
+    init: function (i, time) {
         let item = cc.instantiate(this.itemPrefab);
         let title = item.getChildByName("title").getComponent(cc.Label);
         title.string = "Nhiệm vụ " + i;
         let compItem = item.getComponent("item");
-        compItem.init("Nhiệm vụ " + i);
+        compItem.init("Nhiệm vụ " + i,time);
         this.content.addChild(item);
     },
 
     onLoad: function () {
-        this.init(4);
-        this.init(5);
-        this.init(2);
-        this.init(3);
-        this.init(1);
+        this.popUp.active = false
+        this.init(4, 2);
+        this.init(5, 2);
+        this.init(2, 2);
+        this.init(3, 4);
+        this.init(1, 2);
     },
 
     start: function () { },
 
     autoClick: function () {
+
         this.content.children[4]
             .getComponent("item")
             .wait(this.content.children[3].getComponent("item"));
@@ -60,15 +63,14 @@ cc.Class({
     },
 
     contribute: async function (stepTime, ...stores) {
-        console.log(stepTime);
-        console.log(stores);
-
-        for (const store of stores) {
-            store.executed = false;
-        }
-
         for (const store of stores) {
             await store.run(stepTime);
+        }
+
+        for(const store of stores){
+            if(store.executed == false){
+                this.popUp.active =  true
+            }
         }
     },
 

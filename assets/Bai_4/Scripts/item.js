@@ -11,6 +11,7 @@ cc.Class({
 
     properties: {
         title: "",
+        timeExcute:0,
     },
 
     onLoad: function () {
@@ -18,10 +19,12 @@ cc.Class({
         this.executed = false;
     },
 
-    init: function (title) {
+    init: function (title, timeExcute) {
         this.title = title;
         this.executed = false;
         this.dependencies = [];
+        this.timeExcute = timeExcute;
+        console.log(this.timeExcute)
     },
 
     wait: function (store) {
@@ -29,13 +32,22 @@ cc.Class({
     },
 
     run: async function (stepTime) {
+         if(this.timeExcute > stepTime){
+            
+            return
+        }
         for (const dep of this.dependencies) {
+            if(dep.timeExcute > stepTime){
+                return
+            }
             await dep.run(stepTime);
         }
 
         if (this.executed) return;
-
+        console.log(this.timeExcute)
         this.executed = true;
+        
+   
         console.log(this.title);
         this.node.active = false;
         await this.sleep(stepTime * 1000);

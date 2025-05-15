@@ -6,9 +6,9 @@
       "url": "app://editor/index.html",
       "windowType": "dockable",
       "x": 0,
-      "y": 25,
-      "width": 1440,
-      "height": 875,
+      "y": 38,
+      "width": 1728,
+      "height": 1079,
       "layout": {
         "type": "dock-h",
         "children": [
@@ -103,12 +103,14 @@
         "inspector",
         "cocos-services"
       ]
-    }
+    },
+    " common-asset-worker-worker": {},
+    "window-1747273798443": {}
   },
   "panels": {
     "preferences": {
-      "x": 2307,
-      "y": 326,
+      "x": 242,
+      "y": 242,
       "width": 584,
       "height": 554
     }
